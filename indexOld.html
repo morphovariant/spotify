@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Spotify Challenge</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/app.css" type="text/css" />
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+    <script src="js/app.js"></script>
+</head>
+<body>
+    <div ng-app="myApp" ng-controller="myCtrl">
+        <form name="songForm">
+
+            <div class="form-group">
+                <!--<label>Spotify search:</label>-->
+                <input name="search" ng-minlength=3 placeholder="Spotify search.." ng-model="track" class="form-control" required>
+                    <button ng-disabled="songForm.search.$invalid" ng-click="getSongs()" type="submit"><img src="img/spotify-logo-sq.png" height="25px"/></button>
+                </input>
+                <p class="help-block" ng-show="songForm.search.$error.minlength">Enter 3+ characters</p>
+            </div>
+
+            <!--<div class="form-group">-->
+                <!-- -->
+            <!--</div>-->
+
+        </form>
+
+
+
+        <div class="container-fixed">
+
+            <!--<p ng-show="tracks.length>0" class="help-block">Click to sample</p>-->
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th><a href="" ng-click="reverse=false;order('artists[0].name', false)">Artist</a></th>
+                                <th><a href="" ng-click="reverse=false;order('album.name', false)">Album</a></th>
+                                <th><a href="" ng-click="reverse=false;order('name', false)">Track</a></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="data" ng-class="track.preview_url == currentSong ? 'playing' : ''"  ng-repeat="track in tracks" ng-click="play(track.preview_url)">
+                                <td>{{track.artists[0].name}}</td>
+                                <td>{{track.album.name}}</td>
+                                <td>{{track.name}}</td>
+                                <div class="metaData"></div>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
+
+<!--<td ng-click="getLyrics(track.artists[0], track.name)">{{lyrics}}</td>-->
